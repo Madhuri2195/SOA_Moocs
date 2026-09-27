@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Azure Files Sync Prototype & Simulator</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    .transition-all-custom { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+  </style>
+</head>
+<body class="bg-[var(--background)] text-[var(--foreground)] antialiased p-4 md:p-6 font-sans">
+  <div class="max-w-6xl mx-auto space-y-6">
+
+    <!-- Top Banner: Project & Team Metadata -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[var(--border)] pb-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+              Project: 24CC3046-P073
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+              Hybrid Storage Track
+            </span>
+          </div>
+          <h1 class="text-2xl font-bold text-[var(--foreground)]">Azure Files Sync Interactive Architecture Prototype</h1>
+          <p class="text-sm text-[var(--muted-foreground)]">Simulated Hybrid Cloud Storage with Live Cloud Tiering & Bottleneck Mitigations</p>
+        </div>
+        <div class="text-right">
+          <span class="text-xs uppercase tracking-wider text-[var(--muted-foreground)] block">Faculty Instructor</span>
+          <span class="font-semibold text-sm text-[var(--foreground)]">Dr. Raju Anitha</span>
+          <span class="text-xs text-[var(--muted-foreground)] block">K L University (KLCE)</span>
+        </div>
+      </div>
+
+      <!-- Team Members Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+        <div class="bg-[var(--content)] border border-[var(--border)] p-3 rounded-xl">
+          <div class="text-xs text-[var(--muted-foreground)] font-mono">2400032964</div>
+          <div class="text-sm font-semibold text-[var(--foreground)] truncate">V. H S S N S RAMA KOUSHIK</div>
+        </div>
+        <div class="bg-[var(--content)] border border-[var(--border)] p-3 rounded-xl">
+          <div class="text-xs text-[var(--muted-foreground)] font-mono">2400032747</div>
+          <div class="text-sm font-semibold text-[var(--foreground)] truncate">B. LAKSHMI SRAVANTHI</div>
+        </div>
+        <div class="bg-[var(--content)] border border-[var(--border)] p-3 rounded-xl">
+          <div class="text-xs text-[var(--muted-foreground)] font-mono">2400032991</div>
+          <div class="text-sm font-semibold text-[var(--foreground)] truncate">B. YASWANTH OBUL REDDY</div>
+        </div>
+        <div class="bg-[var(--content)] border border-[var(--border)] p-3 rounded-xl">
+          <div class="text-xs text-[var(--muted-foreground)] font-mono">2400032195</div>
+          <div class="text-sm font-semibold text-[var(--foreground)] truncate">S. MADHURI DEVI</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Architecture Visualizer -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-sm">
+      <h2 class="text-base font-semibold text-[var(--foreground)] mb-4 flex items-center gap-2">
+        <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+        Hybrid Sync Architecture Pipeline
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+        <!-- Node 1 -->
+        <div class="bg-[var(--content)] border border-[var(--border)] p-4 rounded-xl relative">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-semibold uppercase text-blue-500">On-Premises Server</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          </div>
+          <div class="font-bold text-sm">vm-onprem-server</div>
+          <div class="text-xs text-[var(--muted-foreground)]">Windows Server 2022</div>
+          <div class="mt-2 text-xs font-mono bg-[var(--card)] px-2 py-1 rounded border border-[var(--border)]">E:\OnPremShare</div>
+        </div>
+
+        <!-- Node 2 -->
+        <div class="bg-[var(--content)] border border-[var(--border)] p-4 rounded-xl">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-semibold uppercase text-blue-500">Sync Agent</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-500 font-bold">Online</span>
+          </div>
+          <div class="font-bold text-sm">StorageSyncAgent</div>
+          <div class="text-xs text-[var(--muted-foreground)]">FileSyncSvc + Filter Driver</div>
+          <div class="mt-2 text-xs text-[var(--muted-foreground)]">USN Journal Monitoring</div>
+        </div>
+
+        <!-- Node 3 -->
+        <div class="bg-[var(--content)] border border-[var(--border)] p-4 rounded-xl">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-semibold uppercase text-blue-500">Control Plane</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-500 font-bold">Active</span>
+          </div>
+          <div class="font-bold text-sm">filesync-service-073</div>
+          <div class="text-xs text-[var(--muted-foreground)]">Storage Sync Service</div>
+          <div class="mt-2 text-xs text-[var(--muted-foreground)]">Sync Group: syncgroup-corporate</div>
+        </div>
+
+        <!-- Node 4 -->
+        <div class="bg-[var(--content)] border border-[var(--border)] p-4 rounded-xl border-blue-500/30">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-semibold uppercase text-blue-500">Cloud Endpoint</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-500 font-bold">Healthy</span>
+          </div>
+          <div class="font-bold text-sm">cloud-fileshare</div>
+          <div class="text-xs text-[var(--muted-foreground)]">filesync073storage (Azure Files)</div>
+          <div class="mt-2 text-xs text-blue-600 dark:text-blue-400 font-mono">Region: East Asia</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Disk Storage & Live Tiering Controls -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- Left Column: Storage Metrics & Controls -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-sm space-y-5">
+        <h2 class="text-base font-semibold text-[var(--foreground)] flex items-center justify-between">
+          <span>Local Volume Metrics</span>
+          <span class="text-xs font-mono font-normal text-[var(--muted-foreground)]">Volume E:\ (32 GB)</span>
+        </h2>
+
+        <!-- Progress bar -->
+        <div>
+          <div class="flex justify-between text-xs mb-1.5 font-medium">
+            <span>Physical Disk Used: <b id="disk-used-text">1.25 GB</b></span>
+            <span id="disk-free-percent" class="text-emerald-600 dark:text-emerald-400 font-bold">96.1% Free</span>
+          </div>
+          <div class="w-full h-3 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden flex">
+            <div id="disk-bar-used" class="bg-blue-600 h-full transition-all duration-500" style="width: 3.9%;"></div>
+            <div id="disk-bar-free" class="bg-emerald-500/30 h-full flex-1"></div>
+          </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-2 gap-3 pt-2">
+          <div class="bg-[var(--content)] border border-[var(--border)] p-3 rounded-xl">
+            <div class="text-xs text-[var(--muted-foreground)]">Logical File Size</div>
+            <div id="stat-logical" class="text-lg font-bold text-[var(--foreground)] mt-0.5">770 MB</div>
+          </div>
+          <div class="bg-[var(--content)] border border-[var(--border)] p-3 rounded-xl">
+            <div class="text-xs text-[var(--muted-foreground)]">Physical Size on Disk</div>
+            <div id="stat-physical" class="text-lg font-bold text-blue-600 dark:text-blue-400 mt-0.5">770 MB</div>
+          </div>
+          <div class="bg-[var(--content)] border border-[var(--border)] p-3 rounded-xl col-span-2 bg-emerald-500/5 border-emerald-500/30">
+            <div class="text-xs text-emerald-600 dark:text-emerald-400 font-semibold">Local Storage Saved via Tiering</div>
+            <div id="stat-savings" class="text-xl font-bold text-emerald-600 dark:text-emerald-400 mt-0.5">0 MB (0%)</div>
+          </div>
+        </div>
+
+        <hr class="border-[var(--border)]" />
+
+        <!-- Simulation Actions -->
+        <div class="space-y-3">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-[var(--muted-foreground)]">Simulated Operations</h3>
+          
+          <button onclick="triggerCloudTiering()" class="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-all flex items-center justify-center gap-2 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+            Run Invoke-StorageSyncCloudTiering
+          </button>
+
+          <button onclick="proactiveRecallAll()" class="w-full py-2.5 px-4 rounded-xl bg-[var(--content)] hover:bg-[var(--border)] border border-[var(--border)] text-[var(--foreground)] font-semibold text-xs transition-all flex items-center justify-center gap-2">
+            <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+            Run Proactive Recall (Bottleneck 1 Fix)
+          </button>
+        </div>
+
+        <!-- Bottleneck 2: Antivirus Panel -->
+        <div class="p-4 rounded-xl bg-amber-500/5 border border-amber-500/30 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase">Bottleneck 2: Antivirus</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" id="av-exclusion-toggle" class="sr-only peer" checked onchange="toggleAvExclusion()">
+              <div class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-500"></div>
+            </label>
+          </div>
+          <div class="text-[11px] text-[var(--muted-foreground)]">
+            Status: <b id="av-status-label" class="text-emerald-600 dark:text-emerald-400">Path Exclusion Active (Safe)</b>
+          </div>
+          <button onclick="runAntivirusScan()" class="w-full py-2 px-3 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs transition-all flex items-center justify-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            Trigger Full Antivirus Scan
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Interactive File System Explorer -->
+      <div class="lg:col-span-2 bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h2 class="text-base font-semibold text-[var(--foreground)]">E:\OnPremShare File System Explorer</h2>
+              <p class="text-xs text-[var(--muted-foreground)]">Click 'Open' on any file to test on-demand recall latency</p>
+            </div>
+            <button onclick="resetDemoFiles()" class="text-xs text-blue-500 hover:underline">Reset Files</button>
+          </div>
+
+          <!-- Notification Banner -->
+          <div id="action-banner" class="hidden p-3 rounded-xl mb-4 text-xs font-medium border flex items-center justify-between">
+            <span id="banner-text">Action completed</span>
+            <button onclick="closeBanner()" class="text-xs opacity-60 hover:opacity-100">&times;</button>
+          </div>
+
+          <!-- Files Table -->
+          <div class="overflow-x-auto rounded-xl border border-[var(--border)]">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-[var(--content)] border-b border-[var(--border)] text-[var(--muted-foreground)] uppercase text-[10px]">
+                <tr>
+                  <th class="py-2.5 px-3">File Name</th>
+                  <th class="py-2.5 px-3">Logical Size</th>
+                  <th class="py-2.5 px-3">Size on Disk</th>
+                  <th class="py-2.5 px-3">Status</th>
+                  <th class="py-2.5 px-3 text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody id="file-table-body" class="divide-y divide-[var(--border)] font-mono">
+                <!-- Dynamically Rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Recall Latency Visualizer -->
+        <div id="recall-visualizer" class="p-4 rounded-xl bg-[var(--content)] border border-[var(--border)] hidden space-y-2">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-semibold text-blue-500 flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+              Streaming payload from Azure Files (East Asia) to E:\OnPremShare...
+            </span>
+            <span id="recall-timer" class="font-mono text-xs">Simulating WAN Recall (Bottleneck 1)...</span>
+          </div>
+          <div class="w-full h-1.5 bg-slate-300 dark:bg-slate-700 rounded-full overflow-hidden">
+            <div id="recall-progress-bar" class="h-full bg-blue-500 transition-all duration-300" style="width: 0%;"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Implementation Verification Cards -->
+    <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-sm space-y-4">
+      <h2 class="text-base font-semibold text-[var(--foreground)]">PowerShell Verification Commands & Output Reference</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Verification 1 -->
+        <div class="p-4 rounded-xl bg-[var(--content)] border border-[var(--border)] font-mono text-xs space-y-2">
+          <div class="text-[10px] text-blue-500 uppercase font-bold">Verification: Cloud Tiering File Attributes</div>
+          <div class="text-emerald-600 dark:text-emerald-400">PS&gt; Get-ChildItem -Path "E:\OnPremShare" | Select Name, Attributes</div>
+          <div class="text-[var(--muted-foreground)] bg-[var(--card)] p-2 rounded border border-[var(--border)] leading-relaxed">
+            TestFile_1.dat &nbsp; ReparsePoint, Offline<br/>
+            TestFile_2.dat &nbsp; ReparsePoint, Offline<br/>
+            TestFile_3.dat &nbsp; ReparsePoint, Offline
+          </div>
+          <div class="text-[11px] text-[var(--muted-foreground)] font-sans">
+            Proves that files are offloaded to Azure while retaining local pointer stubs with the 0x1000 offline attribute.
+          </div>
+        </div>
+
+        <!-- Verification 2 -->
+        <div class="p-4 rounded-xl bg-[var(--content)] border border-[var(--border)] font-mono text-xs space-y-2">
+          <div class="text-[10px] text-emerald-500 uppercase font-bold">Verification: Antivirus Exclusions (Bottleneck 2)</div>
+          <div class="text-emerald-600 dark:text-emerald-400">PS&gt; Get-MpPreference | Select ExclusionPath, ExclusionProcess</div>
+          <div class="text-[var(--muted-foreground)] bg-[var(--card)] p-2 rounded border border-[var(--border)] leading-relaxed">
+            ExclusionPath &nbsp;&nbsp;&nbsp; : {E:\OnPremShare}<br/>
+            ExclusionProcess &nbsp;: {FileSyncSvc.exe}
+          </div>
+          <div class="text-[11px] text-[var(--muted-foreground)] font-sans">
+            Guarantees Windows Defender skips deep reads on tiered stubs, preventing mass-recall avalanches.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JavaScript Simulator Logic -->
+  <script>
+    let files = [
+      { id: 1, name: "TestFile_1.dat", sizeMB: 20, isTiered: false },
+      { id: 2, name: "TestFile_2.dat", sizeMB: 20, isTiered: false },
+      { id: 3, name: "CAD_Blueprint_2026.dwg", sizeMB: 180, isTiered: false },
+      { id: 4, name: "Dataset_Archive.zip", sizeMB: 450, isTiered: false },
+      { id: 5, name: "Project_Proposal.pdf", sizeMB: 100, isTiered: false }
+    ];
+
+    let avExclusionActive = true;
+
+    function renderFiles() {
+      const tbody = document.getElementById("file-table-body");
+      tbody.innerHTML = "";
+
+      let totalLogical = 0;
+      let totalPhysical = 0;
+
+      files.forEach(f => {
+        totalLogical += f.sizeMB;
+        const physical = f.isTiered ? 0 : f.sizeMB;
+        totalPhysical += physical;
+
+        const tr = document.createElement("tr");
+        tr.className = "hover:bg-[var(--content)] transition-all";
+        tr.innerHTML = `
+          <td class="py-3 px-3 flex items-center gap-2">
+            <span class="text-base">${f.isTiered ? "☁️" : "📄"}</span>
+            <span class="font-medium text-[var(--foreground)]">${f.name}</span>
+          </td>
+          <td class="py-3 px-3 text-[var(--foreground)]">${f.sizeMB} MB</td>
+          <td class="py-3 px-3 font-bold ${f.isTiered ? "text-emerald-600 dark:text-emerald-400" : "text-[var(--foreground)]"}">
+            ${f.isTiered ? "0 KB (Stub)" : f.sizeMB + " MB"}
+          </td>
+          <td class="py-3 px-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${
+              f.isTiered 
+                ? "bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20" 
+                : "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
+            }">
+              ${f.isTiered ? "TIERED (Cold)" : "HOT (Cached Local)"}
+            </span>
+          </td>
+          <td class="py-3 px-3 text-right">
+            <button onclick="accessFile(${f.id})" class="px-2.5 py-1 rounded bg-[var(--content)] hover:bg-[var(--border)] border border-[var(--border)] text-[var(--foreground)] text-[11px] font-sans font-semibold">
+              ${f.isTiered ? "Recall & Open" : "Open"}
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      // Update statistics
+      document.getElementById("stat-logical").innerText = totalLogical + " MB";
+      document.getElementById("stat-physical").innerText = totalPhysical + " MB";
+      
+      const savedMB = totalLogical - totalPhysical;
+      const savedPercent = totalLogical > 0 ? ((savedMB / totalLogical) * 100).toFixed(1) : 0;
+      document.getElementById("stat-savings").innerText = `${savedMB} MB (${savedPercent}%)`;
+
+      // Update progress bar
+      const baseSystemUsedMB = 500; // Base OS & overhead
+      const currentUsedMB = baseSystemUsedMB + totalPhysical;
+      const totalDiskMB = 32000;
+      const usedPercent = ((currentUsedMB / totalDiskMB) * 100).toFixed(1);
+      const freePercent = (100 - usedPercent).toFixed(1);
+
+      document.getElementById("disk-used-text").innerText = (currentUsedMB / 1024).toFixed(2) + " GB";
+      document.getElementById("disk-free-percent").innerText = freePercent + "% Free";
+      document.getElementById("disk-bar-used").style.width = usedPercent + "%";
+    }
+
+    function triggerCloudTiering() {
+      files.forEach(f => f.isTiered = true);
+      renderFiles();
+      showBanner("Invoke-StorageSyncCloudTiering: All cold files tiered to Azure Files! Physical disk consumption dropped to 0 KB.", "success");
+    }
+
+    function proactiveRecallAll() {
+      files.forEach(f => f.isTiered = false);
+      renderFiles();
+      showBanner("Invoke-StorageSyncFileRecall -Path 'E:\\OnPremShare': Pre-warmed all files locally. Users will experience 0ms recall latency!", "success");
+    }
+
+    function accessFile(id) {
+      const file = files.find(f => f.id === id);
+      if (!file) return;
+
+      if (!file.isTiered) {
+        showBanner(`Opened ${file.name} instantly from high-speed local cache (0 ms recall delay).`, "info");
+      } else {
+        // Simulate Bottleneck 1 Recall Latency
+        const visualizer = document.getElementById("recall-visualizer");
+        const bar = document.getElementById("recall-progress-bar");
+        visualizer.classList.remove("hidden");
+        bar.style.width = "0%";
+
+        let progress = 0;
+        const interval = setInterval(() => {
+          progress += 25;
+          bar.style.width = progress + "%";
+          if (progress >= 100) {
+            clearInterval(interval);
+            setTimeout(() => {
+              visualizer.classList.add("hidden");
+              file.isTiered = false; // recalled
+              renderFiles();
+              showBanner(`File ${file.name} recalled from Azure Files over network! End-user experienced ~1.2s recall delay (Demonstrated Bottleneck 1).`, "warning");
+            }, 300);
+          }
+        }, 200);
+      }
+    }
+
+    function toggleAvExclusion() {
+      const checkbox = document.getElementById("av-exclusion-toggle");
+      avExclusionActive = checkbox.checked;
+      const label = document.getElementById("av-status-label");
+      if (avExclusionActive) {
+        label.innerText = "Path Exclusion Active (Safe)";
+        label.className = "text-emerald-600 dark:text-emerald-400";
+        showBanner("Antivirus Path Exclusion enabled: E:\\OnPremShare will be skipped during deep scans.", "success");
+      } else {
+        label.innerText = "No Exclusion (Vulnerable to Recall Storm)";
+        label.className = "text-rose-600 dark:text-rose-400 font-bold";
+        showBanner("WARNING: Exclusion disabled! Antivirus full scans will trigger Bottleneck 2 (Mass Recall Storm).", "danger");
+      }
+    }
+
+    function runAntivirusScan() {
+      if (avExclusionActive) {
+        showBanner("Antivirus Scan Completed in 0.8s: Scanned 12,410 system files. E:\\OnPremShare was safely excluded (0 cold files recalled).", "success");
+      } else {
+        // Trigger mass recall storm
+        const tieredCount = files.filter(f => f.isTiered).length;
+        files.forEach(f => f.isTiered = false); // Mass recall!
+        renderFiles();
+        showBanner(`CRITICAL BOTTLENECK 2 TRIGGERED: Antivirus read file headers of all ${tieredCount} tiered files! Mass recall storm initiated — 770 MB downloaded, filling local disk!`, "danger");
+      }
+    }
+
+    function resetDemoFiles() {
+      files = [
+        { id: 1, name: "TestFile_1.dat", sizeMB: 20, isTiered: false },
+        { id: 2, name: "TestFile_2.dat", sizeMB: 20, isTiered: false },
+        { id: 3, name: "CAD_Blueprint_2026.dwg", sizeMB: 180, isTiered: false },
+        { id: 4, name: "Dataset_Archive.zip", sizeMB: 450, isTiered: false },
+        { id: 5, name: "Project_Proposal.pdf", sizeMB: 100, isTiered: false }
+      ];
+      renderFiles();
+      showBanner("File system reset to initial state.", "info");
+    }
+
+    function showBanner(msg, type) {
+      const banner = document.getElementById("action-banner");
+      const text = document.getElementById("banner-text");
+      text.innerText = msg;
+      banner.classList.remove("hidden");
+
+      if (type === "success") {
+        banner.className = "p-3 rounded-xl mb-4 text-xs font-medium border bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20 flex items-center justify-between";
+      } else if (type === "warning") {
+        banner.className = "p-3 rounded-xl mb-4 text-xs font-medium border bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20 flex items-center justify-between";
+      } else if (type === "danger") {
+        banner.className = "p-3 rounded-xl mb-4 text-xs font-medium border bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20 flex items-center justify-between";
+      } else {
+        banner.className = "p-3 rounded-xl mb-4 text-xs font-medium border bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20 flex items-center justify-between";
+      }
+    }
+
+    function closeBanner() {
+      document.getElementById("action-banner").classList.add("hidden");
+    }
+
+    // Initial render
+    renderFiles();
+  </script>
+</body>
+</html>
